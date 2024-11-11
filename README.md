@@ -6,6 +6,8 @@ A aplicação foi construída utilizando React para a interface de usuário, com
 
 O gerenciamento de estado foi feito com Zustand, permitindo a comunicação eficiente entre os componentes, especialmente no que diz respeito ao estado do produto atual. Para validar os dados do formulário de login, cadastro e edição de produtos, foi utilizado o React Hook Form combinado com Zod.
 
+Para realizar o login, é necessário utilizar o nome de usuário e a senha fornecidos pela API. Você pode acessar as informações de autenticação da API DummyJSON através do seguinte link: https://dummyjson.com/docs/auth
+
 ### Clonando o repositório
 
 ```sh
