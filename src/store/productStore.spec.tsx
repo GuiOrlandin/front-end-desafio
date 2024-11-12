@@ -2,7 +2,6 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import { useProductStore } from "./procutsStore";
-import { act } from "react";
 
 describe("Product store", () => {
   it("should set products array", async () => {
