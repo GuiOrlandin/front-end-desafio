@@ -6,7 +6,7 @@ import fetchMock from "jest-fetch-mock";
 import "@testing-library/jest-dom";
 
 import EditOrCreateProductDialog from ".";
-import { ProductResponse, useProductStore } from "@/store/procutsStore";
+import { ProductResponse } from "@/store/procutsStore";
 
 const pushMock = jest.fn();
 

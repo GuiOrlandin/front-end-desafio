@@ -4,7 +4,6 @@ import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import Home from "./page";
 import fetchMock from "jest-fetch-mock";
-import { act } from "react";
 import { useUserStore } from "@/store/userStore";
 
 const pushMock = jest.fn();

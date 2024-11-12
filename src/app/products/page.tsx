@@ -26,7 +26,7 @@ export default function Products() {
   const addProducts = useProductStore((state) => state.addProducts);
   const products = useProductStore((state) => state.products);
   const [filterPriority, setFilterPriority] = useState("");
-  const [dateFilterPriority, setDateFilterPriority] = useState("");
+  const [dateFilterPriority, setDateFilterPriority] = useState("newest");
   const [filterTitleOrBrand, setFilterTitleOrBrand] = useState("");
 
   async function getAllProducts() {
@@ -70,22 +70,28 @@ export default function Products() {
       } else if (sortBy === "title" && a.title && b.title) {
         return a.title.localeCompare(b.title);
       }
-      if (dateFilterPriority === "newest" && b.meta && a.meta) {
+
+      if (
+        dateFilterPriority === "newest" &&
+        b.meta?.updatedAt &&
+        a.meta?.updatedAt
+      ) {
         return (
-          new Date(b.meta?.updatedAt).getTime() -
-          new Date(a.meta?.updatedAt).getTime()
+          new Date(b.meta.updatedAt).getTime() -
+          new Date(a.meta.updatedAt).getTime()
         );
-      } else if (dateFilterPriority === "oldest" && b.meta && a.meta) {
+      } else if (
+        dateFilterPriority === "oldest" &&
+        b.meta?.updatedAt &&
+        a.meta?.updatedAt
+      ) {
         return (
-          new Date(a.meta?.updatedAt).getTime() -
-          new Date(b.meta?.updatedAt).getTime()
+          new Date(a.meta.updatedAt).getTime() -
+          new Date(b.meta.updatedAt).getTime()
         );
       }
 
-      return (
-        new Date(b.meta?.updatedAt!).getTime() -
-        new Date(a.meta?.updatedAt!).getTime()
-      );
+      return 0;
     });
 
   const startIndex = (currentPage - 1) * limit;
@@ -103,7 +109,7 @@ export default function Products() {
         getAllProducts();
       }
     }
-  }, [products]);
+  }, [products, getAllProducts]);
 
   return (
     <ProductsContainer $variant={theme}>
