@@ -126,7 +126,7 @@ describe("ProductInfo Page", () => {
         "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png",
     });
 
-    const view = render(<ProductInfo params={params} />);
+    render(<ProductInfo params={params} />);
 
     await waitFor(() => {
       expect(screen.queryByText("Carregando...")).toBeInTheDocument();

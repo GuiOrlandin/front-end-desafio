@@ -50,24 +50,20 @@ describe("Login Page", () => {
     userEvent.type(usernameInput, "emilys");
     userEvent.type(passwordInput, "emilyspass");
 
-    await act(async () => {
-      userEvent.click(loginButton);
-    });
+    userEvent.click(loginButton);
 
-    await act(async () => {
-      useUserStore.setState({
-        user: {
-          id: "1",
-          username: "emilys",
-          email: "emily.johnson@x.dummyjson.com",
-          firstName: "Emily",
-          lastName: "Johnson",
-          gender: "female",
-          image: "https://dummyjson.com/icon/emilys/128",
-          accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-          refreshToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-        },
-      });
+    useUserStore.setState({
+      user: {
+        id: "1",
+        username: "emilys",
+        email: "emily.johnson@x.dummyjson.com",
+        firstName: "Emily",
+        lastName: "Johnson",
+        gender: "female",
+        image: "https://dummyjson.com/icon/emilys/128",
+        accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+        refreshToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+      },
     });
 
     await waitFor(() => {

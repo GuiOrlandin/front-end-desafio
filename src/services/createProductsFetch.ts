@@ -50,7 +50,7 @@ export const createProductFetch = async ({
 }: CreateProductPostRequest): Promise<CreateProductResponse> => {
   const generateRandomId = () => Math.floor(Math.random() * 1000000).toString();
 
-  let response = await fetch("https://dummyjson.com/products/add", {
+  const response = await fetch("https://dummyjson.com/products/add", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

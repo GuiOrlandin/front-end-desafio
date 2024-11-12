@@ -2,6 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import { useProductStore } from "./procutsStore";
+import { act } from "react";
 
 describe("Product store", () => {
   it("should set products array", async () => {
@@ -295,14 +296,13 @@ describe("Product store", () => {
       render(<ProductComponent />);
 
       const deleteProductButton = screen.getByTestId("delete-product-button");
-      const productDisplay = screen.getByTestId("delete-display");
 
       userEvent.click(deleteProductButton);
 
       await waitFor(() => {
-        expect(productDisplay).not.toHaveTextContent(
-          "title: Geladeira Exemplo"
-        );
+        expect(
+          screen.queryByText("title: Geladeira Exemplo")
+        ).not.toBeInTheDocument();
       });
     });
 });

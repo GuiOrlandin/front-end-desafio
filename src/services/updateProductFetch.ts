@@ -54,7 +54,7 @@ export const updateProductFetch = async ({
       discountPercentage,
       reviews,
       meta: {
-        createdAt: data.meta?.createdAt!,
+        createdAt: data.meta ? data.meta?.createdAt : new Date(),
         updatedAt: new Date(),
       },
     };

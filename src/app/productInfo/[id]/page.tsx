@@ -46,17 +46,19 @@ export default function ProductInfo({
 
   const theme = useThemeStore((state) => state.theme);
 
-  async function useGetProducts(id: string) {
+  async function getProducts(id: string) {
     try {
-      const product = await productFetch(resolvedParamsId!);
+      if (resolvedParamsId) {
+        const product = await productFetch(resolvedParamsId);
 
-      if ("id" in product) {
-        if (product && products.length > 0) {
-          const filteredProduct = products.find(
-            (product) => String(product.id) === id
-          );
+        if ("id" in product) {
+          if (product && products.length > 0) {
+            const filteredProduct = products.find(
+              (product) => String(product.id) === id
+            );
 
-          setFetchedProduct(filteredProduct);
+            setFetchedProduct(filteredProduct);
+          }
         }
       }
     } catch (error) {
@@ -65,7 +67,7 @@ export default function ProductInfo({
   }
 
   useEffect(() => {
-    if (fetchedProduct!) {
+    if (fetchedProduct) {
       setIsLoading(false);
     }
   }, [fetchedProduct]);
@@ -83,7 +85,7 @@ export default function ProductInfo({
 
   useEffect(() => {
     if (resolvedParamsId && products) {
-      useGetProducts(resolvedParamsId);
+      getProducts(resolvedParamsId);
     }
   }, [resolvedParamsId, products]);
 
@@ -124,13 +126,14 @@ export default function ProductInfo({
                   <IoStar />
                 </Rating>
 
-                {fetchedProduct?.reviews?.length! > 1 && (
-                  <ReviewsNumber $variant={theme}>
-                    {fetchedProduct?.reviews?.length! > 1
-                      ? `${fetchedProduct?.reviews?.length} avaliações`
-                      : `${fetchedProduct?.reviews?.length} avaliação`}
-                  </ReviewsNumber>
-                )}
+                {fetchedProduct?.reviews &&
+                  fetchedProduct?.reviews?.length > 1 && (
+                    <ReviewsNumber $variant={theme}>
+                      {fetchedProduct?.reviews?.length > 1
+                        ? `${fetchedProduct?.reviews?.length} avaliações`
+                        : `${fetchedProduct?.reviews?.length} avaliação`}
+                    </ReviewsNumber>
+                  )}
               </ProductTitleAndReviews>
               <p>{fetchedProduct?.description}</p>
 
@@ -176,7 +179,7 @@ export default function ProductInfo({
           </ProductInfoContent>
           <ReviewContainer $variant={theme}>
             <h3>Avaliações</h3>
-            {fetchedProduct?.reviews!.length! >= 1 ? (
+            {fetchedProduct?.reviews && fetchedProduct?.reviews.length >= 1 ? (
               <>
                 {fetchedProduct?.reviews?.map((review, index) => (
                   <ReviewItem key={index} $variant={theme}>
