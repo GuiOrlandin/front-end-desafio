@@ -17,7 +17,7 @@ import {
 } from "./style";
 import { useThemeStore } from "@/store/themeStore";
 import EditOrCreateItemDialog from "../createOrEditItemDialog";
-import { Product } from "@/hooks/useProductsFetch";
+import { Product } from "@/services/getAllProductsFetch";
 import DeleteItemDialog from "../deleteItemDialog";
 import { useRouter } from "next/navigation";
 

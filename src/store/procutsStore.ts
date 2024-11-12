@@ -1,4 +1,4 @@
-import { CreateProductPostRequest } from "@/hooks/useCreateProductsFetch";
+import { CreateProductPostRequest } from "@/services/createProductsFetch";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 

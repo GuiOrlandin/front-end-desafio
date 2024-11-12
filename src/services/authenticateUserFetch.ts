@@ -10,7 +10,7 @@ interface ApiError {
   status: number;
 }
 
-export const useAuthenticateUserFetch = async ({
+export const authenticateUserFetch = async ({
   username,
   password,
 }: authenticateUserPostRequest): Promise<User | ApiError> => {

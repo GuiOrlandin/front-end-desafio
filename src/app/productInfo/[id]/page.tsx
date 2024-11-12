@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useProductStore } from "@/store/procutsStore";
 import {
   ProductInfoContainer,
@@ -28,7 +28,7 @@ import {
 } from "./styles";
 import Header from "@/components/header";
 import Image from "next/image";
-import { Product, useProductFetch } from "@/hooks/useProductFetch";
+import { Product, productFetch } from "@/services/productFetch";
 import LoadingPage from "@/components/loadingPage";
 import { useThemeStore } from "@/store/themeStore";
 
@@ -46,9 +46,9 @@ export default function ProductInfo({
 
   const theme = useThemeStore((state) => state.theme);
 
-  async function getProducts(id: string) {
+  async function useGetProducts(id: string) {
     try {
-      const product = await useProductFetch(resolvedParamsId!);
+      const product = await productFetch(resolvedParamsId!);
 
       if ("id" in product) {
         if (product && products.length > 0) {
@@ -65,7 +65,6 @@ export default function ProductInfo({
   }
 
   useEffect(() => {
-
     if (fetchedProduct!) {
       setIsLoading(false);
     }
@@ -84,7 +83,7 @@ export default function ProductInfo({
 
   useEffect(() => {
     if (resolvedParamsId && products) {
-      getProducts(resolvedParamsId);
+      useGetProducts(resolvedParamsId);
     }
   }, [resolvedParamsId, products]);
 

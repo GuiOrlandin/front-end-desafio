@@ -17,9 +17,9 @@ import {
 } from "./styles";
 import Header from "@/components/header";
 import CardItem from "@/components/cardItem";
-import { useProductsFetch } from "@/hooks/useProductsFetch";
 import { useProductStore } from "@/store/procutsStore";
 import LoadingPage from "@/components/loadingPage";
+import { getAllProductsFetch } from "@/services/getAllProductsFetch";
 
 export default function Products() {
   const theme = useThemeStore((state) => state.theme);
@@ -31,7 +31,7 @@ export default function Products() {
 
   async function getAllProducts() {
     try {
-      const allProducts = await useProductsFetch();
+      const allProducts = await getAllProductsFetch();
 
       if (
         Array.isArray(allProducts) &&
@@ -70,15 +70,15 @@ export default function Products() {
       } else if (sortBy === "title" && a.title && b.title) {
         return a.title.localeCompare(b.title);
       }
-      if (dateFilterPriority === "newest") {
+      if (dateFilterPriority === "newest" && b.meta && a.meta) {
         return (
-          new Date(b.meta?.updatedAt!).getTime() -
-          new Date(a.meta?.updatedAt!).getTime()
+          new Date(b.meta?.updatedAt).getTime() -
+          new Date(a.meta?.updatedAt).getTime()
         );
-      } else if (dateFilterPriority === "oldest") {
+      } else if (dateFilterPriority === "oldest" && b.meta && a.meta) {
         return (
-          new Date(a.meta?.updatedAt!).getTime() -
-          new Date(b.meta?.updatedAt!).getTime()
+          new Date(a.meta?.updatedAt).getTime() -
+          new Date(b.meta?.updatedAt).getTime()
         );
       }
 

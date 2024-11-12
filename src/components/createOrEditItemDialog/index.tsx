@@ -26,11 +26,11 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Product } from "@/hooks/useProductsFetch";
 import { useThemeStore } from "@/store/themeStore";
-import { useCreateProductFetch } from "@/hooks/useCreateProductsFetch";
+import { createProductFetch } from "@/services/createProductsFetch";
 import { useProductStore } from "@/store/procutsStore";
-import { useUpdateProductFetch } from "@/hooks/useEditProductFetch";
+import { Product } from "@/services/productFetch";
+import { updateProductFetch } from "@/services/updateProductFetch";
 
 interface EditOrCreateItemDialogProps {
   initialProduct?: Product;
@@ -109,9 +109,9 @@ export default function EditOrCreateProductDialog({
 
   const colorOfEditIcon = theme === "dark" ? "white" : "#3F3D45";
 
-  async function handleCreateProduct(data: ProductSchema) {
+  async function useHandleCreateProduct(data: ProductSchema) {
     try {
-      const product = await useCreateProductFetch({
+      const product = await createProductFetch({
         brand: data.brand,
         description: data.description,
         thumbnail:
@@ -143,9 +143,9 @@ export default function EditOrCreateProductDialog({
     }
   }
 
-  async function handleEditItem(editedData: ProductSchema) {
+  async function useHandleEditItem(editedData: ProductSchema) {
     try {
-      const product = await useUpdateProductFetch({
+      const product = await updateProductFetch({
         brand: editedData.brand,
         description: editedData.description,
         thumbnail: initialProduct?.thumbnail,
@@ -218,8 +218,8 @@ export default function EditOrCreateProductDialog({
             <FormOfCreateOrEditItem
               onSubmit={
                 dialogType === "create"
-                  ? handleSubmit(handleCreateProduct)
-                  : handleSubmit(handleEditItem)
+                  ? handleSubmit(useHandleCreateProduct)
+                  : handleSubmit(useHandleEditItem)
               }
               data-testid="form-product"
             >

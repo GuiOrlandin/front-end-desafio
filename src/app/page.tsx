@@ -18,7 +18,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { z } from "zod";
-import { useAuthenticateUserFetch } from "@/hooks/useAuthenticateUserFetch";
+import { authenticateUserFetch } from "@/services/authenticateUserFetch";
 import { useUserStore } from "@/store/userStore";
 
 import { useRouter } from "next/navigation";
@@ -53,7 +53,7 @@ export default function Home() {
     console.log("passou");
 
     try {
-      const authenticateResponse = await useAuthenticateUserFetch({
+      const authenticateResponse = await authenticateUserFetch({
         username: data.username,
         password: data.password,
       });

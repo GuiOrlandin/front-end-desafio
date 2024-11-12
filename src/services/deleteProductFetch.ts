@@ -3,7 +3,7 @@ export interface DeleteProductResponse {
   isDeleted: boolean;
 }
 
-export const useDeleteProductFetch = async (
+export const deleteProductFetch = async (
   id: string
 ): Promise<DeleteProductResponse> => {
   try {

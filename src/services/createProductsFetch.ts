@@ -35,7 +35,7 @@ export interface CreateProductResponse extends CreateProductPostRequest {
   id: string;
 }
 
-export const useCreateProductFetch = async ({
+export const createProductFetch = async ({
   brand,
   description,
   price,

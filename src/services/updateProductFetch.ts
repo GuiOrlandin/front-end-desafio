@@ -1,10 +1,10 @@
-import { CreateProductPostRequest } from "./useCreateProductsFetch";
+import { CreateProductPostRequest } from "./createProductsFetch";
 
 export interface UpdateProductResponse extends CreateProductPostRequest {
   id: string;
 }
 
-export const useUpdateProductFetch = async ({
+export const updateProductFetch = async ({
   brand,
   description,
   price,

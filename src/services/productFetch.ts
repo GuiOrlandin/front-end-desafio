@@ -1,4 +1,4 @@
-import { CreateProductPostRequest } from "./useCreateProductsFetch";
+import { CreateProductPostRequest } from "./createProductsFetch";
 
 interface ApiError {
   message: string;
@@ -9,9 +9,9 @@ export interface Product extends CreateProductPostRequest {
   id: string;
 }
 
-export const useProductsFetch = async (): Promise<Product[] | ApiError> => {
+export const productFetch = async (id: string): Promise<Product | ApiError> => {
   try {
-    const response = await fetch("https://dummyjson.com/products", {
+    const response = await fetch(`https://dummyjson.com/products/${1}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -26,7 +26,10 @@ export const useProductsFetch = async (): Promise<Product[] | ApiError> => {
     }
 
     const data = await response.json();
-    return data.products as Product[];
+    return {
+      ...data,
+      id,
+    } as Product;
   } catch (error) {
     return {
       message: error instanceof Error ? error.message : "Erro desconhecido",

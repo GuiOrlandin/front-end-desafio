@@ -12,7 +12,7 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import { useState } from "react";
 import { useThemeStore } from "@/store/themeStore";
 import { useProductStore } from "@/store/procutsStore";
-import { useDeleteProductFetch } from "@/hooks/useDeleteProductFetch";
+import { deleteProductFetch } from "@/services/deleteProductFetch";
 
 interface DeleteItemDialogProps {
   product_id: string;
@@ -29,7 +29,7 @@ export default function DeleteItemDialog({
 
   async function handleDeleteProduct(product_id: string) {
     try {
-      const response = await useDeleteProductFetch("1");
+      const response = await deleteProductFetch("1");
       //simulando o id 1 pois o id do produto criado não constaram no banco de dados do DummyJSON
 
       if (response.isDeleted === true) {
