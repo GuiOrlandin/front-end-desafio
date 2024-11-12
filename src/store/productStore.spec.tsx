@@ -114,7 +114,7 @@ describe("Product store", () => {
     await waitFor(() => {
       expect(productsDisplay).toHaveTextContent("Produtos: 2")
     })
-  }),
+  })
     it("should create a product", async () => {
       function ProductComponent() {
         const products = useProductStore((state) => state.products)
@@ -190,7 +190,7 @@ describe("Product store", () => {
       await waitFor(() => {
         expect(productDisplay).toHaveTextContent("title: Smartphone Exemplo")
       })
-    }),
+    })
     it("should edit a product", async () => {
       function ProductComponent() {
         const products = useProductStore((state) => state.products)
@@ -264,7 +264,7 @@ describe("Product store", () => {
       await waitFor(() => {
         expect(productDisplay).toHaveTextContent("title: Geladeira Exemplo")
       })
-    }),
+    })
     it("should delete a product", async () => {
       function ProductComponent() {
         const products = useProductStore((state) => state.products)
