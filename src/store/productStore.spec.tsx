@@ -6,8 +6,8 @@ import { useProductStore } from "./procutsStore";
 describe("Product store", () => {
   it("should set products array", async () => {
     function ProductComponent() {
-      const products = useProductStore((state) => state.products);
-      const handleSetProducts = useProductStore((state) => state.addProducts);
+      const products = useProductStore((state) => state.products)
+      const handleSetProducts = useProductStore((state) => state.addProducts)
 
       return (
         <div>
@@ -101,26 +101,26 @@ describe("Product store", () => {
               : `Produtos: ${products.length}`}
           </div>
         </div>
-      );
+      )
     }
 
-    render(<ProductComponent />);
+    render(<ProductComponent />)
 
-    const createProductsButton = screen.getByTestId("create-products-button");
-    const productsDisplay = screen.getByTestId("products-display");
+    const createProductsButton = screen.getByTestId("create-products-button")
+    const productsDisplay = screen.getByTestId("products-display")
 
-    userEvent.click(createProductsButton);
+    userEvent.click(createProductsButton)
 
     await waitFor(() => {
-      expect(productsDisplay).toHaveTextContent("Produtos: 2");
-    });
+      expect(productsDisplay).toHaveTextContent("Produtos: 2")
+    })
   }),
     it("should create a product", async () => {
       function ProductComponent() {
-        const products = useProductStore((state) => state.products);
+        const products = useProductStore((state) => state.products)
         const handleCreateProduct = useProductStore(
           (state) => state.addProduct
-        );
+        )
 
         return (
           <div>
@@ -177,24 +177,24 @@ describe("Product store", () => {
                 ))}
             </div>
           </div>
-        );
+        )
       }
 
-      render(<ProductComponent />);
+      render(<ProductComponent />)
 
-      const createProductButton = screen.getByTestId("create-product-button");
-      const productDisplay = screen.getByTestId("product-display");
+      const createProductButton = screen.getByTestId("create-product-button")
+      const productDisplay = screen.getByTestId("product-display")
 
-      userEvent.click(createProductButton);
+      userEvent.click(createProductButton)
 
       await waitFor(() => {
-        expect(productDisplay).toHaveTextContent("title: Smartphone Exemplo");
-      });
+        expect(productDisplay).toHaveTextContent("title: Smartphone Exemplo")
+      })
     }),
     it("should edit a product", async () => {
       function ProductComponent() {
-        const products = useProductStore((state) => state.products);
-        const handleEditProduct = useProductStore((state) => state.editProduct);
+        const products = useProductStore((state) => state.products)
+        const handleEditProduct = useProductStore((state) => state.editProduct)
 
         return (
           <div>
@@ -251,26 +251,26 @@ describe("Product store", () => {
                 ))}
             </div>
           </div>
-        );
+        )
       }
 
-      render(<ProductComponent />);
+      render(<ProductComponent />)
 
-      const editProductButton = screen.getByTestId("edit-product-button");
-      const productDisplay = screen.getByTestId("product-display");
+      const editProductButton = screen.getByTestId("edit-product-button")
+      const productDisplay = screen.getByTestId("product-display")
 
-      userEvent.click(editProductButton);
+      userEvent.click(editProductButton)
 
       await waitFor(() => {
-        expect(productDisplay).toHaveTextContent("title: Geladeira Exemplo");
-      });
+        expect(productDisplay).toHaveTextContent("title: Geladeira Exemplo")
+      })
     }),
     it("should delete a product", async () => {
       function ProductComponent() {
-        const products = useProductStore((state) => state.products);
+        const products = useProductStore((state) => state.products)
         const handleRemoveProduct = useProductStore(
           (state) => state.removeProduct
-        );
+        )
 
         return (
           <div>
@@ -289,19 +289,19 @@ describe("Product store", () => {
                 ))}
             </div>
           </div>
-        );
+        )
       }
 
-      render(<ProductComponent />);
+      render(<ProductComponent />)
 
-      const deleteProductButton = screen.getByTestId("delete-product-button");
+      const deleteProductButton = screen.getByTestId("delete-product-button")
 
-      userEvent.click(deleteProductButton);
+      userEvent.click(deleteProductButton)
 
       await waitFor(() => {
         expect(
           screen.queryByText("title: Geladeira Exemplo")
-        ).not.toBeInTheDocument();
-      });
-    });
-});
+        ).not.toBeInTheDocument()
+      })
+    })
+})
